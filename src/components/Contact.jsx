@@ -22,7 +22,7 @@ function Contact() {
     setStatus(null);
 
     try {
-      const response = await fetch("http://localhost:5000/send-email", {
+      const response = await fetch("https://betsi-s-portfolio-1.onrender.com/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -226,10 +226,14 @@ function Contact() {
                 {loading ? "Sending..." : "Send Message"}
               </button>
               {status === "success" && (
-                <p className="text-green-400 mt-2">Message sent successfully!</p>
+                <p className="text-green-400 mt-2">
+                  Message sent successfully!
+                </p>
               )}
               {status === "error" && (
-                <p className="text-red-400 mt-2">Failed to send message. Try again.</p>
+                <p className="text-red-400 mt-2">
+                  Failed to send message. Try again.
+                </p>
               )}
             </form>
           </div>

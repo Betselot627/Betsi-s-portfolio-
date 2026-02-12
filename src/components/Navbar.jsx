@@ -40,7 +40,7 @@ function Navbar() {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("hero")}
-            className="text-2xl font-bold text-[#5BC0EB] hover:text-white transition-all duration-300 hover:scale-110"
+            className="text-2xl cursor-pointer font-bold text-[#5BC0EB] hover:text-white transition-all duration-300 hover:scale-110"
           >
             BT<span className="text-white">.</span>
           </button>
@@ -51,7 +51,7 @@ function Navbar() {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="relative text-white hover:text-[#5BC0EB] transition-all duration-300 font-medium group"
+                className="relative cursor-pointer text-white hover:text-[#5BC0EB] transition-all duration-300 font-medium group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {link.name}

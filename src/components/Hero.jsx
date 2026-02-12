@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import profilePhoto from "../photo/p.jpg";
+import profilePhoto from "../photo/logo1.png";
 
 
 function Hero() {
@@ -38,13 +38,13 @@ function Hero() {
           <div className="flex flex-wrap gap-4 pt-4">
             <button
               onClick={() => scrollToSection("projects")}
-              className="bg-[#5BC0EB] text-[#0D3B66] px-8 py-3 rounded-lg font-semibold hover:bg-[#4AA8D8] transition-all duration-300 hover:scale-105 shadow-lg"
+              className="bg-[#5BC0EB] cursor-pointer text-[#0D3B66] px-8 py-3 rounded-lg font-semibold hover:bg-[#4AA8D8] transition-all duration-300 hover:scale-105 shadow-lg"
             >
               View Projects
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="border-2 border-[#5BC0EB] text-[#5BC0EB] px-8 py-3 rounded-lg font-semibold hover:bg-[#5BC0EB] hover:text-[#0D3B66] transition-all duration-300 hover:scale-105"
+              className="border-2 cursor-pointer border-[#5BC0EB] text-[#5BC0EB] px-8 py-3 rounded-lg font-semibold hover:bg-[#5BC0EB] hover:text-[#0D3B66] transition-all duration-300 hover:scale-105"
             >
               Contact Me
             </button>
