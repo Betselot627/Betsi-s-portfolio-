@@ -1,10 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
+const { Resend } = require("resend");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Initialize Resend with your API key
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -13,14 +16,13 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests
+    if (!origin) return callback(null, true);
     if (!allowedOrigins.includes(origin)) {
       return callback(new Error("CORS not allowed by server"), false);
     }
     return callback(null, true);
   },
-  methods: ["GET", "POST"],
-  credentials: true
+  methods: ["GET", "POST"]
 }));
 
 app.use(express.json());
@@ -42,18 +44,9 @@ app.post("/send-email", async (req, res) => {
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASS
-      }
-    });
-
-    const mailOptions = {
-      from: `"${name}" <${process.env.GMAIL_USER}>`,
-      replyTo: email,
-      to: process.env.GMAIL_USER,
+    await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>", // you can keep this for testing
+      to: "betselottigistu4@gmail.com", // your Gmail
       subject: `New message from ${name}`,
       html: `
         <h3>New Contact Message</h3>
@@ -61,22 +54,19 @@ app.post("/send-email", async (req, res) => {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
         <p>${message}</p>
-      `
-    };
-
-    await transporter.sendMail(mailOptions);
+      `,
+    });
 
     res.status(200).json({
       success: true,
-      message: "Email sent successfully."
+      message: "Email sent successfully"
     });
 
   } catch (error) {
-    console.error("Failed to send email:", error);
-
+    console.error("Email error:", error);
     res.status(500).json({
       success: false,
-      message: "Failed to send email."
+      message: "Failed to send email"
     });
   }
 });
